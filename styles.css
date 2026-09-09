@@ -1,24 +1,43 @@
 :root {
-  --background: hsl(228 47% 17%);
-  --foreground: hsl(50 10% 95%);
-  --card: hsl(223 49% 25%);
-  --primary: hsl(44 60% 55%);
-  --primary-foreground: hsl(228 47% 17%);
-  --secondary: hsl(223 40% 32%);
-  --muted: hsl(223 35% 30%);
-  --muted-foreground: hsl(220 15% 72%);
-  --border: hsl(223 42% 34%);
-  --destructive: hsl(0 72% 55%);
+  --background: #172447;
+  --foreground: #ffffff;
+
+  --card: #213361;
+  --card-foreground: #ffffff;
+
+  --primary: #d1ad47;
+  --primary-foreground: #213361;
+
+  --secondary: #213361;
+
+  --muted: #213361;
+  --muted-foreground: rgba(255, 255, 255, 0.72);
+
+  --border: rgba(255, 255, 255, 0.18);
+
+  --destructive: #dc4b4b;
   --blue: #60a5fa;
   --green: #4ade80;
   --orange: #fb923c;
+
   --radius: 12px;
+
   --display: "Playfair Display", Georgia, serif;
+
   color-scheme: dark;
 }
 
+
+/* =========================================================
+   RESET / GENERAL
+   ========================================================= */
+
 * {
   box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
 }
 
 body {
@@ -26,7 +45,13 @@ body {
   min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   line-height: 1.5;
 }
 
@@ -43,48 +68,70 @@ button {
 .app {
   min-height: 100vh;
   background: var(--background);
+  color: var(--foreground);
 }
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .header {
   position: sticky;
   top: 0;
   z-index: 30;
+
   border-bottom: 1px solid var(--border);
-  background: hsl(228 47% 17% / 0.85);
+
+  background: rgba(23, 36, 71, 0.96);
+
   backdrop-filter: blur(10px);
 }
 
 .header-inner {
   max-width: 768px;
+
   margin: 0 auto;
+
   padding: 14px 16px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 12px;
 }
 
 .brand {
   display: flex;
   align-items: center;
+
   min-width: 0;
+
   gap: 12px;
 }
 
 .logo {
   width: 40px;
   height: 40px;
+
   border-radius: 999px;
+
   object-fit: contain;
+
   flex: 0 0 auto;
 }
 
 .brand-title {
   margin: 0;
+
   font-family: var(--display);
+
   font-size: 18px;
   line-height: 1.1;
-  color: var(--foreground);
+
+  color: #ffffff;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -92,22 +139,35 @@ button {
 
 .brand-subtitle {
   margin: 2px 0 0;
+
   color: var(--primary);
+
   font-size: 11px;
+
   letter-spacing: 0.18em;
+
   text-transform: uppercase;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
+
   gap: 8px;
+
   flex-shrink: 0;
 }
 
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
 .main {
   max-width: 672px;
+
   margin: 0 auto;
+
   padding: 24px 16px 40px;
 }
 
@@ -119,23 +179,42 @@ button {
   margin-top: 24px;
 }
 
+
+/* =========================================================
+   CARDS / BOXES
+   ========================================================= */
+
 .card {
   border: 1px solid var(--border);
+
   background: var(--card);
+
+  color: #ffffff;
+
   border-radius: 16px;
+
   padding: 20px;
 }
 
 .section-title {
   margin: 0 0 16px;
-  color: var(--foreground);
+
+  color: #ffffff;
+
   font-size: 18px;
   font-weight: 650;
 }
 
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
 .grid-2 {
   display: grid;
+
   grid-template-columns: repeat(2, minmax(0, 1fr));
+
   gap: 16px;
 }
 
@@ -149,8 +228,11 @@ button {
 
 .label {
   display: block;
+
   margin-bottom: 8px;
-  color: hsl(50 10% 95% / 0.8);
+
+  color: #ffffff;
+
   font-size: 14px;
   font-weight: 500;
 }
@@ -158,18 +240,28 @@ button {
 .input,
 .select {
   width: 100%;
+
   border: 1px solid var(--border);
+
   border-radius: var(--radius);
-  background: hsl(228 47% 17% / 0.5);
-  color: var(--foreground);
+
+  background: var(--card);
+
+  color: #ffffff;
+
   padding: 12px 16px;
+
   font-size: 14px;
+
   outline: none;
-  transition: border-color 0.2s, background-color 0.2s;
+
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
 }
 
 .input::placeholder {
-  color: var(--muted-foreground);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .input:focus,
@@ -177,45 +269,87 @@ button {
   border-color: var(--primary);
 }
 
+
+/* =========================================================
+   SEGMENTED OPTIONS
+   ========================================================= */
+
 .segmented {
   display: flex;
+
   gap: 12px;
 }
 
 .option-grid {
   display: flex;
   flex-direction: row;
+
   gap: 12px;
 }
 
+
+/* Default clickable options */
+
 .choice {
   flex: 1;
+
   min-height: 48px;
-  border: 1px solid var(--border);
+
+  border: 1px solid var(--primary);
+
   border-radius: var(--radius);
-  background: hsl(228 47% 17% / 0.4);
-  color: hsl(50 10% 95% / 0.82);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
+
   padding: 12px 16px;
+
   font-size: 14px;
   font-weight: 600;
-  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+
+  transition:
+    border-color 0.2s,
+    background-color 0.2s,
+    color 0.2s,
+    transform 0.15s,
+    filter 0.15s;
 }
 
 .choice:hover {
-  border-color: hsl(44 60% 55% / 0.5);
+  background: var(--primary);
+
+  color: var(--primary-foreground);
+
+  border-color: var(--primary);
+
+  filter: brightness(1.08);
+}
+
+.choice:active {
+  transform: scale(0.98);
 }
 
 .choice.active {
   border-color: var(--primary);
-  background: hsl(44 60% 55% / 0.15);
-  color: var(--primary);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
 }
 
 .choice.warn {
-  border-color: hsl(44 60% 55% / 0.5);
-  background: var(--secondary);
-  color: hsl(50 10% 95% / 0.75);
+  border-color: var(--primary);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
 }
+
+
+/* =========================================================
+   ORDER GROUPS
+   ========================================================= */
 
 .group {
   margin-bottom: 20px;
@@ -223,15 +357,25 @@ button {
 
 .group-heading {
   margin: 0 0 4px;
+
+  color: #ffffff;
+
   font-size: 14px;
   font-weight: 700;
 }
+
+
+/* =========================================================
+   STEPPERS
+   ========================================================= */
 
 .stepper-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   border-top: 1px solid var(--border);
+
   padding: 10px 0;
 }
 
@@ -240,101 +384,164 @@ button {
 }
 
 .stepper-label {
-  color: hsl(50 10% 95% / 0.9);
+  color: #ffffff;
+
   font-size: 14px;
 }
 
 .stepper {
   display: flex;
   align-items: center;
+
   gap: 12px;
 }
 
 .round-button {
   width: 32px;
   height: 32px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border);
+
+  border: 1px solid var(--primary);
+
   border-radius: 999px;
-  background: hsl(228 47% 17% / 0.5);
-  color: var(--foreground);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
+
   line-height: 1;
-  transition: border-color 0.2s, color 0.2s;
+
+  font-weight: 800;
+
+  transition:
+    filter 0.2s,
+    transform 0.15s;
 }
 
 .round-button:hover {
   border-color: var(--primary);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
+
+  filter: brightness(1.08);
+}
+
+.round-button:active {
+  transform: scale(0.94);
 }
 
 .round-button:disabled {
   cursor: default;
+
   opacity: 0.3;
+
+  filter: none;
 }
 
 .count {
   width: 24px;
+
   text-align: center;
+
+  color: #ffffff;
+
   font-size: 14px;
   font-weight: 700;
+
   font-variant-numeric: tabular-nums;
 }
+
+
+/* =========================================================
+   MAIN BUTTONS
+   ========================================================= */
 
 .add-button,
 .primary-button,
 .outline-button,
 .danger-button {
   border-radius: var(--radius);
+
   padding: 14px 16px;
+
   font-size: 14px;
   font-weight: 800;
-  transition: border-color 0.2s, background-color 0.2s, color 0.2s, opacity 0.2s;
+
+  transition:
+    border-color 0.2s,
+    background-color 0.2s,
+    color 0.2s,
+    opacity 0.2s,
+    filter 0.2s,
+    transform 0.15s;
+}
+
+.add-button,
+.primary-button,
+.outline-button {
+  border: 1px solid var(--primary);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
 }
 
 .add-button {
   width: 100%;
-  border: 2px solid var(--primary);
-  background: hsl(44 60% 55% / 0.1);
-  color: var(--primary);
+
+  border-width: 2px;
 }
 
-.add-button:hover {
-  background: hsl(44 60% 55% / 0.2);
-}
-
-.primary-button {
-  border: 1px solid var(--primary);
-  background: var(--primary);
-  color: var(--primary-foreground);
-}
-
-.primary-button:hover {
-  background: hsl(44 60% 55% / 0.9);
-}
-
-.outline-button {
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--foreground);
-}
-
+.add-button:hover,
+.primary-button:hover,
 .outline-button:hover {
+  background: var(--primary);
+
+  color: var(--primary-foreground);
+
   border-color: var(--primary);
-  color: var(--primary);
+
+  filter: brightness(1.08);
 }
+
+.add-button:active,
+.primary-button:active,
+.outline-button:active {
+  transform: scale(0.98);
+}
+
+
+/* Destructive button stays red */
 
 .danger-button {
   border: 1px solid var(--destructive);
+
   background: var(--destructive);
-  color: var(--foreground);
+
+  color: #ffffff;
+
   padding: 8px 12px;
+
   font-weight: 600;
+}
+
+.danger-button:hover {
+  filter: brightness(1.08);
 }
 
 .full {
   width: 100%;
 }
+
+
+/* =========================================================
+   ORDER SUMMARY
+   ========================================================= */
 
 .summary-list > * + * {
   margin-top: 12px;
@@ -343,8 +550,13 @@ button {
 .summary-item,
 .order-line {
   border: 1px solid var(--border);
+
   border-radius: var(--radius);
-  background: hsl(228 47% 17% / 0.4);
+
+  background: var(--card);
+
+  color: #ffffff;
+
   padding: 14px;
 }
 
@@ -352,41 +564,66 @@ button {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
   gap: 12px;
 }
 
 .item-name {
   margin: 0;
-  color: var(--foreground);
+
+  color: #ffffff;
+
   font-weight: 600;
 }
 
 .item-details {
   margin: 2px 0 0;
+
   color: var(--muted-foreground);
+
   font-size: 14px;
 }
+
+
+/* =========================================================
+   REMOVE BUTTONS
+   ========================================================= */
 
 .remove-button {
   width: 28px;
   height: 28px;
+
   flex: 0 0 auto;
+
   border: 1px solid var(--border);
+
   border-radius: 999px;
+
   background: transparent;
-  color: var(--muted-foreground);
+
+  color: rgba(255, 255, 255, 0.72);
+
   font-size: 19px;
+
   line-height: 1;
 }
 
 .remove-button:hover {
   border-color: var(--destructive);
+
   color: var(--destructive);
 }
 
+
+/* =========================================================
+   TOTAL
+   ========================================================= */
+
 .total-row {
   margin-top: 16px;
+
   padding-top: 16px;
+
   border-top: 1px solid var(--border);
 }
 
@@ -399,65 +636,104 @@ button {
 .total-label,
 .tiny {
   color: var(--muted-foreground);
+
   font-size: 13px;
 }
 
 .total-value {
   color: var(--primary);
+
   font-size: 20px;
   font-weight: 700;
 }
 
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
 .error {
   margin: 12px 0 0;
-  color: var(--destructive);
+
+  color: #ff7070;
+
   font-size: 14px;
 }
 
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
 .modal {
   position: fixed;
+
   inset: 0;
+
   z-index: 50;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 16px;
-  background: rgb(0 0 0 / 0.6);
+
+  background: rgba(0, 0, 0, 0.65);
+
   backdrop-filter: blur(4px);
 }
 
 .modal-card {
   width: min(100%, 384px);
+
   border: 1px solid var(--border);
+
   border-radius: 16px;
+
   background: var(--card);
+
+  color: #ffffff;
+
   padding: 32px;
+
   text-align: center;
-  box-shadow: 0 25px 50px rgb(0 0 0 / 0.35);
+
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
 }
 
 .success-mark {
   width: 64px;
   height: 64px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   margin: 0 auto 20px;
-  border: 1px solid hsl(44 60% 55% / 0.3);
+
+  border: 1px solid var(--primary);
+
   border-radius: 999px;
-  background: hsl(44 60% 55% / 0.15);
-  color: var(--primary);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
+
   font-size: 32px;
 }
 
 .modal-card h2 {
   margin: 0;
+
+  color: #ffffff;
+
   font-size: 24px;
   font-weight: 700;
 }
 
 .modal-card p {
   margin: 6px 0 0;
+
   font-size: 14px;
 }
 
@@ -465,81 +741,160 @@ button {
   color: var(--muted-foreground);
 }
 
+
+/* =========================================================
+   ADMIN TABS
+   ========================================================= */
+
 .tabs-wrap {
   max-width: 768px;
+
   margin: 0 auto;
+
   padding: 16px 16px 0;
 }
 
 .tabs {
   display: flex;
+
   gap: 8px;
 }
 
 .tab {
-  border: 0;
+  border: 1px solid var(--primary);
+
   border-radius: 8px;
-  background: transparent;
-  color: var(--muted-foreground);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
+
   padding: 8px 16px;
+
   font-size: 14px;
   font-weight: 600;
+
   text-transform: capitalize;
+
+  transition:
+    filter 0.2s,
+    transform 0.15s;
+}
+
+.tab:hover {
+  filter: brightness(1.08);
+}
+
+.tab:active {
+  transform: scale(0.97);
 }
 
 .tab.active {
-  border: 1px solid hsl(44 60% 55% / 0.3);
-  background: hsl(44 60% 55% / 0.15);
-  color: var(--primary);
+  border-color: var(--primary);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
 }
+
+
+/* =========================================================
+   ADMIN SEARCH
+   ========================================================= */
 
 .filter-row {
   position: relative;
+
   margin-bottom: 16px;
 }
 
 .filter-row .input {
   background: var(--card);
+
+  color: #ffffff;
+
   padding-left: 40px;
 }
 
 .search-icon {
   position: absolute;
+
   left: 14px;
   top: 50%;
+
   transform: translateY(-50%);
+
   color: var(--muted-foreground);
 }
 
+
+/* =========================================================
+   FILTER CHIPS
+   ========================================================= */
+
 .chip-row {
   display: flex;
+
   gap: 8px;
+
   margin: 0 -4px 20px;
+
   padding: 0 4px 8px;
+
   overflow-x: auto;
 }
 
 .chip {
   white-space: nowrap;
-  border: 1px solid var(--border);
+
+  border: 1px solid var(--primary);
+
   border-radius: 999px;
-  background: var(--card);
-  color: hsl(50 10% 95% / 0.82);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
+
   padding: 8px 16px;
+
   font-size: 14px;
   font-weight: 600;
+
+  transition:
+    filter 0.2s,
+    transform 0.15s;
+}
+
+.chip:hover {
+  filter: brightness(1.08);
+}
+
+.chip:active {
+  transform: scale(0.97);
 }
 
 .chip.active {
   border-color: var(--primary);
+
   background: var(--primary);
+
   color: var(--primary-foreground);
 }
 
+
+/* =========================================================
+   ORDER CARDS
+   ========================================================= */
+
 .order-card {
   border: 1px solid var(--border);
+
   border-radius: 16px;
+
   background: var(--card);
+
+  color: #ffffff;
+
   padding: 20px;
 }
 
@@ -553,72 +908,113 @@ button {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
   gap: 12px;
 }
 
 .order-name {
   margin: 0;
+
+  color: #ffffff;
+
   font-size: 18px;
   font-weight: 700;
 }
 
 .order-meta {
   margin: 2px 0 0;
+
   color: var(--muted-foreground);
+
   font-size: 14px;
 }
+
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
 
 .status {
   display: inline-flex;
   align-items: center;
+
   border: 1px solid;
+
   border-radius: 999px;
+
   padding: 2px 10px;
+
   font-size: 12px;
   font-weight: 600;
 }
 
 .status.pending {
-  border-color: rgb(249 115 22 / 0.3);
-  background: rgb(249 115 22 / 0.15);
+  border-color: rgba(249, 115, 22, 0.35);
+
+  background: rgba(249, 115, 22, 0.15);
+
   color: var(--orange);
 }
 
 .status.progress {
-  border-color: rgb(59 130 246 / 0.3);
-  background: rgb(59 130 246 / 0.15);
+  border-color: rgba(96, 165, 250, 0.35);
+
+  background: rgba(96, 165, 250, 0.15);
+
   color: var(--blue);
 }
 
 .status.delivered {
-  border-color: rgb(34 197 94 / 0.3);
-  background: rgb(34 197 94 / 0.15);
+  border-color: rgba(74, 222, 128, 0.35);
+
+  background: rgba(74, 222, 128, 0.15);
+
   color: var(--green);
 }
 
 .status.user {
-  border-color: rgb(59 130 246 / 0.3);
-  background: rgb(59 130 246 / 0.15);
+  border-color: rgba(96, 165, 250, 0.35);
+
+  background: rgba(96, 165, 250, 0.15);
+
   color: var(--blue);
 }
 
 .status.admin {
-  border-color: hsl(44 60% 55% / 0.3);
-  background: hsl(44 60% 55% / 0.15);
-  color: var(--primary);
+  border-color: var(--primary);
+
+  background: var(--primary);
+
+  color: var(--primary-foreground);
 }
 
 .status.blocked {
-  border-color: hsl(0 72% 55% / 0.3);
-  background: hsl(0 72% 55% / 0.15);
-  color: var(--destructive);
+  border-color: rgba(220, 75, 75, 0.4);
+
+  background: rgba(220, 75, 75, 0.15);
+
+  color: #ff7070;
 }
+
+
+/* =========================================================
+   ORDER TIME
+   ========================================================= */
 
 .order-time {
   flex-shrink: 0;
+
   text-align: right;
+
   font-size: 14px;
+
+  color: #ffffff;
 }
+
+
+/* =========================================================
+   ORDER LINES
+   ========================================================= */
 
 .order-lines {
   margin-top: 16px;
@@ -630,63 +1026,110 @@ button {
 
 .order-line {
   display: flex;
+
   gap: 10px;
+
   padding: 12px;
 }
 
 .line-number {
   color: var(--primary);
+
   font-size: 14px;
   font-weight: 800;
 }
 
 .order-foot {
   margin-top: 16px;
+
   align-items: center;
 }
 
+
+/* =========================================================
+   PAYMENT PILL
+   ========================================================= */
+
 .pill {
   display: inline-flex;
+
   margin-left: 8px;
-  border: 1px solid hsl(44 60% 55% / 0.3);
+
+  border: 1px solid var(--primary);
+
   border-radius: 999px;
-  background: hsl(44 60% 55% / 0.1);
+
+  background: rgba(209, 173, 71, 0.12);
+
   color: var(--primary);
+
   padding: 2px 8px;
+
   font-size: 12px;
   font-weight: 700;
 }
 
+
+/* =========================================================
+   ICON BUTTONS
+   ========================================================= */
+
 .icon-button {
   width: 42px;
   height: 42px;
+
   border: 1px solid var(--border);
+
   border-radius: var(--radius);
+
   background: transparent;
-  color: var(--muted-foreground);
+
+  color: rgba(255, 255, 255, 0.72);
+
   font-size: 18px;
 }
 
 .icon-button:hover {
   border-color: var(--destructive);
+
   color: var(--destructive);
 }
 
+
+/* =========================================================
+   CONFIRM DELETE
+   ========================================================= */
+
 .confirm-remove {
   margin-top: 12px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 12px;
-  border: 1px solid hsl(0 72% 55% / 0.3);
+
+  border: 1px solid rgba(220, 75, 75, 0.35);
+
   border-radius: var(--radius);
-  background: hsl(0 72% 55% / 0.05);
+
+  background: rgba(220, 75, 75, 0.08);
+
+  color: #ffffff;
+
   padding: 12px;
 }
 
+
+/* =========================================================
+   ADMIN USERS
+   ========================================================= */
+
 .inline-form {
   display: flex;
+
   gap: 12px;
+
   margin-bottom: 24px;
 }
 
@@ -700,50 +1143,93 @@ button {
 
 .member-card {
   border: 1px solid var(--border);
+
   border-radius: 16px;
+
   background: var(--card);
+
+  color: #ffffff;
+
   padding: 16px;
 }
 
 .role-actions {
   display: flex;
+
   gap: 8px;
+
   margin-top: 12px;
 }
 
 .role-actions .chip {
   flex: 1;
+
   border-radius: 8px;
+
   padding: 7px 12px;
+
   text-transform: capitalize;
 }
 
+
+/* =========================================================
+   EMPTY STATES
+   ========================================================= */
+
 .empty {
   padding: 80px 0;
+
   color: var(--muted-foreground);
+
   text-align: center;
 }
 
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
 .toast {
   position: fixed;
+
   bottom: 24px;
   left: 50%;
+
   z-index: 40;
+
   transform: translateX(-50%);
+
   border: 1px solid var(--border);
+
   border-radius: 999px;
+
   background: var(--card);
-  color: var(--foreground);
+
+  color: #ffffff;
+
   padding: 10px 20px;
+
   font-size: 14px;
-  box-shadow: 0 10px 30px rgb(0 0 0 / 0.3);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
+
+
+/* =========================================================
+   UTILITY
+   ========================================================= */
 
 .hidden {
   display: none;
 }
 
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media (max-width: 640px) {
+
   .header-inner {
     padding: 12px 16px;
   }
@@ -752,6 +1238,7 @@ button {
   .option-grid,
   .inline-form {
     grid-template-columns: 1fr;
+
     flex-direction: column;
   }
 
@@ -763,6 +1250,7 @@ button {
   .order-foot,
   .confirm-remove {
     align-items: stretch;
+
     flex-direction: column;
   }
 
