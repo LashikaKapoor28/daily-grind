@@ -1,3 +1,23 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_WEB_API_KEY",
+  authDomain: "colonialcafe25.firebaseapp.com",
+  projectId: "colonialcafe25",
+  storageBucket: "colonialcafe25.firebasestorage.app",
+  messagingSenderId: "303903613544",
+  appId: "YOUR_WEB_APP_ID"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+
 const $ = (selector, root = document) => root.querySelector(selector);
 const app = $("#app");
 
@@ -223,12 +243,12 @@ function getOrders() {
   );
 }
 
-function setOrders(orders) {
-  localStorage.setItem(
-    "dailyGrindOrders",
-    JSON.stringify(orders)
-  );
-}
+//function setOrders(orders) {
+  //localStorage.setItem(
+    //"dailyGrindOrders",
+    //JSON.stringify(orders)
+  //); 
+//}
 
 // =====================================================
 // MEMBERS
@@ -1688,39 +1708,32 @@ function memberCard(member) {
 // PLACE ORDER
 // =====================================================
 
-function placeOrder() {
+async function placeOrder() {
   const {
     firstName,
     lastName,
-    roomNumber,
+    roomNumber
   } = state.form;
 
-  if (
-    !firstName.trim() ||
-    !lastName.trim()
-  ) {
+  if (!firstName.trim() || !lastName.trim()) {
     return update({
-      error:
-        "Please enter your first and last name.",
+      error: "Please enter your first and last name."
     });
   }
 
   if (!roomNumber.trim()) {
     return update({
-      error:
-        "Please enter your room number before submitting.",
+      error: "Please enter your room number before submitting."
     });
   }
 
   if (!state.cart.length) {
     return update({
-      error:
-        "Please add at least one item to your order.",
+      error: "Please add at least one item to your order."
     });
   }
 
-  const user =
-    getCurrentUser();
+  const user = getCurrentUser();
 
   if (!user) {
     state.view = "login";
@@ -1728,61 +1741,75 @@ function placeOrder() {
     return;
   }
 
+  const items = state.cart.map((item) => ({
+    id: item.id,
+
+    drinkType: item.drinkType,
+
+    coffeeType:
+      item.drinkType === "Coffee"
+        ? item.coffeeType
+        : null,
+
+    teaType:
+      item.drinkType === "Tea"
+        ? item.teaType
+        : "",
+
+    temperature: item.temperature,
+
+    regularCream: item.regularCream,
+    frenchVanillaCream: item.frenchVanillaCream,
+    hazelnutCream: item.hazelnutCream,
+
+    rawSugar: item.rawSugar,
+    splenda: item.splenda,
+
+    regularMilk: item.regularMilk,
+    almondMilk: item.almondMilk,
+    oatMilk: item.oatMilk
+  }));
+
   const order = {
-    id: crypto.randomUUID(),
+    teacherFirstName: firstName.trim(),
+    teacherLastName: lastName.trim(),
+    teacherEmail: user.email,
+    roomNumber: roomNumber.trim(),
 
-    teacherFirstName:
-      firstName.trim(),
+    items,
 
-    teacherLastName:
-      lastName.trim(),
+    cost: items.length * 1.0,
 
-    // Use the email that logged into the app.
-    teacherEmail:
-      user.email,
+    status: "Pending",
 
-    roomNumber:
-      roomNumber.trim(),
-
-    items:
-      state.cart,
-
-    cost:
-      state.cart.length,
-
-    status:
-      "Pending",
-
-    created_date:
-      new Date().toISOString(),
+    timestamp: serverTimestamp()
   };
 
-  setOrders([
-    order,
-    ...getOrders(),
-  ]);
+  try {
+    await addDoc(
+      collection(db, "orders"),
+      order
+    );
 
-  update({
-    cart: [],
-    error: "",
+    update({
+      cart: [],
+      error: "",
 
-    modal: {
-      firstName:
-        order.teacherFirstName,
+      modal: {
+        firstName: order.teacherFirstName,
+        lastName: order.teacherLastName,
+        roomNumber: order.roomNumber,
+        itemCount: order.items.length,
+        total: order.cost
+      }
+    });
+  } catch (error) {
+    console.error("Error submitting order:", error);
 
-      lastName:
-        order.teacherLastName,
-
-      roomNumber:
-        order.roomNumber,
-
-      itemCount:
-        order.items.length,
-
-      total:
-        order.cost,
-    },
-  });
+    update({
+      error: "Could not submit your order. Please try again."
+    });
+  }
 }
 
 // =====================================================
